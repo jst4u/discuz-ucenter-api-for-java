@@ -49,6 +49,7 @@ Updated Feb 4, 2010 by ping.china
 第二步：客户端配置
 UC_API = http://localhost/ucUC_IP = 127.0.0.1UC_KEY = 123456UC_APPID = 3UC_CONNECT =第三步：启动客户端
 将应用接口发布服务器上。启动。 注意：web.xml 中必须含有：
+
 <servlet>
 
 <servlet-name>
@@ -87,6 +88,8 @@ api
 
 </servlet-mapping>
 
+
+
 第四步：
 运行测试程序： http://localhost/context/Jsp_demo.jsp
 结束！
@@ -98,6 +101,7 @@ no_tenAT163.com QQ:18786721
 
 login  
 Updated Feb 4, 2010 by ping.china
+
 Client e = new Client(); String result = e.uc_user_login("username", "password");LinkedList[String> rs = XMLHelper.uc_unserialize(result); if(rs.size()>0){
 int $uid = Integer.parseInt(rs.get(0)); String $username = rs.get(1); String $password = rs.get(2); String $email = rs.get(3); if($uid > 0) {
 System.out.println("登录成功"); System.out.println($username); System.out.println($password); System.out.println($email);String $ucsynlogin = e.uc_user_synlogin($uid); System.out.println("登录成功"+$ucsynlogin);//本地登陆代码 //TODO ... ....} else if($uid == -1) {
@@ -115,6 +119,7 @@ System.out.println("Login failed"); System.out.println(result);
 logout  
 logout by using ucenter client
 Updated Feb 4, 2010 by ping.china
+
 Client uc = new Client();//setcookie('Example_auth', '', -86400);// 生成同步退出的代码
 String $ucsynlogout = uc.uc_user_synlogout(); System.out.println("退出成功"+$ucsynlogout);
 
@@ -124,6 +129,7 @@ String $ucsynlogout = uc.uc_user_synlogout(); System.out.println("退出成功"+
 register  
 如何使用API实现注册用户.
 Updated Feb 4, 2010 by ping.china
+
 Client uc = new Client();//setcookie('Example_auth', '', -86400);// 生成同步退出的代码
 String $returns = uc.uc_user_register("cccc", "ccccc" ,"ccc@abc.com" ); int $uid = Integer.parseInt($returns); if($uid <= 0) {
 if($uid == -1) {
@@ -151,9 +157,11 @@ System.out.println("OK:"+$returns);
 syslogging  
 同步登陆的方法
 Updated Sep 12, 2011 by ping.china
+
 Introduction同步登陆实现方法介绍
 Details现找到UC.java
 里面有一个方法
+
 protected String doAnswer(HttpServletRequest request, HttpServletResponse response){
      //处理
      String $code = request.getParameter("code");
@@ -164,6 +172,7 @@ protected String doAnswer(HttpServletRequest request, HttpServletResponse respon
 
 所有同步操作在此方法中实现。
 你可以根据同步的“代码”设定执行方法来实现你的功能。（这部分工作必须由你来实现）
+
                 } else if($action.equals("synlogin")) {
 
                         if(!API_SYNLOGIN ) return (API_RETURN_FORBIDDEN);
